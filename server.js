@@ -1,5 +1,7 @@
 require('dotenv').config();
 // const mongoose = require('mongoose');
+const knexConfig = require('./database/knexfile');
+const knex = require('knex')(knexConfig[process.env.NODE_ENV]);
 const chalk = require('chalk')
 
 // UNCAUGHT EXCEPTIONS
@@ -13,26 +15,21 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
-// const DB = process.env.PAYERCOINS_DB.replace(
-//   '<password>',
-//   process.env.PAYERCOINS_PASSWORD
-// );
+// check connection to the database for knex
+knex.raw('select 1+1 as result').then(() => {
+    console.log(chalk.green('Knex connection successful'));
+}).catch((err) => {
+    console.log(chalk.red('Knex connection failed'));
+    console.log(err);
+}).finally(() => {
+    knex.destroy();
+}).catch((err) => {
+    console.log(chalk.red('Knex connection failed'));
+    console.log(err);
+}).finally(() => {
+    knex.destroy();
+});
 
-// mongoose
-//   .connect(DB, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => {
-//     console.log(chalk.green('Connected to DB successfully...'));
-//   });
-
-// mongoose.connection.on('error', (err) => console.log(err.message));
-// mongoose.connection.on('disconnected', () =>
-//   console.log(chalk.red('Mongoose connection closed'))
-// );
 
 //   START SERVER
 
