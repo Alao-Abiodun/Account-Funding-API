@@ -1,0 +1,8 @@
+{
+  "name": "Account-Funding-API",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Alao-Abiodun/Account-Funding-API.git",
+  "author": "Alao-Abiodun <46402042+Alao-Abiodun@users.noreply.github.com>",
+  "license": "MIT"
+}
