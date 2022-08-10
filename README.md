@@ -65,12 +65,22 @@ SOFTWARE.
 
     - [Release](https://www.github.com/Alao-Abiodun/account-funding-api/releases)
 
+### Changelog
+
     - [Changelog](https://www.github.com/Alao-Abiodun/account-funding-api/blob/master/CHANGELOG.md)
+
+### Contributors
 
     - [Contributors](https://www.github.com/Alao-Abiodun/account-funding-api//graphs/contributors)
 
+### License
+
     - [Code of Conduct](https://www.github.com/Alao-Abiodun/account-funding-api/ndsqr-api/blob/master/CODE_OF_CONDUCT.md)
 
+### License
+
     - [License](https://www.github.com/Alao-Abiodun/account-funding-api//blob/master/LICENSE.md)
+
+### Readme
 
     - [Readme](https://www.github.com/Alao-Abiodun/account-funding-api//blob/master/README.md)
