@@ -1,10 +1,17 @@
 const authServices = require('../services/auth.services');
+const {successResMsg} = require('../utils/libs/response');
 
 // create user and by calling the userServices function
 exports.register = async (req, res) => {
     try {
         const result = await authServices.createUser(req.body);
-        res.status(200).json({message: 'User created successfully'});
+        if (!result) {
+            throw new Error('Please provide all required fields');
+        }
+        const dataInfo = {
+            message: 'User created successfully',
+        }
+        return successResMsg(res, 201, dataInfo);
     } catch (error) {
         console.log(error.message);
     }
@@ -14,7 +21,10 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const result = await authServices.login(req.body);
-        res.status(200).json(result);
+        const dataInfo = {
+            message: 'User logged in successfully',
+        }
+        return successResMsg(res, 200, dataInfo);
     } catch (error) {
         console.log(error.message);
     }
