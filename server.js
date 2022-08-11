@@ -1,7 +1,7 @@
 require('dotenv').config();
 // const mongoose = require('mongoose');
-const knexConfig = require('./database/knexfile');
-const knex = require('knex')(knexConfig[process.env.NODE_ENV]);
+const knex = require('./database/db');
+
 const chalk = require('chalk')
 
 // UNCAUGHT EXCEPTIONS
@@ -21,13 +21,6 @@ knex.raw('select 1+1 as result').then(() => {
 }).catch((err) => {
     console.log(chalk.red('Knex connection failed'));
     console.log(err);
-}).finally(() => {
-    knex.destroy();
-}).catch((err) => {
-    console.log(chalk.red('Knex connection failed'));
-    console.log(err);
-}).finally(() => {
-    knex.destroy();
 });
 
 
