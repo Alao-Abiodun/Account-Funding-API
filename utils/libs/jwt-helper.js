@@ -3,7 +3,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const secret = process.env.LENDSQR_ACCESS_TOKEN_SECRET;
-console.log(secret, 'SECRET FROM ENV')
 
 module.exports = {
   signAccessToken: (data) => {
@@ -13,7 +12,6 @@ module.exports = {
       // issuer: 'payercoins',
       // audience: '', // TODO: add audience and issuer
     };
-    console.log(secret, 'SCERET USED FOR SIGNING THE TOKEN')
     const token = JWT.sign(payload, secret, options);
     return token;
   },

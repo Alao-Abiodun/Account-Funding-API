@@ -1,5 +1,6 @@
 const authServices = require('../services/auth.services');
 const {successResMsg} = require('../utils/libs/response');
+const {createSendToken} = require('../utils/libs/createSendToken');
 
 // create user and by calling the userServices function
 exports.register = async (req, res) => {
@@ -19,12 +20,10 @@ exports.register = async (req, res) => {
 
 // create a login and by calling the userServices function
 exports.login = async (req, res) => {
+    let result;
     try {
-        const result = await authServices.login(req.body);
-        const dataInfo = {
-            message: 'User logged in successfully',
-        }
-        return successResMsg(res, 200, dataInfo);
+        result = await authServices.login(req.body);
+        createSendToken(result, 200, res);
     } catch (error) {
         console.log(error.message);
     }
