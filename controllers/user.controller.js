@@ -14,3 +14,43 @@ exports.getAllUsers = async (req, res) => {
         console.log(error.message);
     }
 }
+
+exports.createUserBankAccount = async (req, res) => {
+    try {
+        const result = await userServices.createUserBankAccount(req.body);
+        const dataInfo = {
+            message: 'User bank account created successfully',
+            result
+        }
+        return successResMsg(res, 201, dataInfo);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+exports.getUserBankAccount = async (req, res) => {
+    try {
+        // const { id } = req.params;
+        const result = await userServices.getUserBankAccount(req.params);
+        const dataInfo = {
+            message: 'User bank account retrieved successfully',
+            result
+        }
+        return successResMsg(res, 200, dataInfo);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+exports.fundUserAccount = async (req, res) => {
+    try {
+        const result = await userServices.fundUserAccount(req.params, req.body);
+        const dataInfo = {
+            message: 'User bank account funded successfully',
+            result
+        }
+        return successResMsg(res, 200, dataInfo);
+    } catch (error) {
+        console.log(error.message);
+    }
+}

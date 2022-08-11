@@ -1,4 +1,4 @@
-const knex = require('../database/db');
+const db = require('../database/db');
 const AppError = require('../utils/libs/appError');
 const {hashPassword, comparePassword} = require('../utils/libs/bcrypt-helper');
 
@@ -10,7 +10,7 @@ exports.createUser = async (data) => {
         }
         // hash the password before inserting into the database
         const hashedPassword = await hashPassword(data.password);
-        const user = await knex('user').insert({
+        const user = await db('user').insert({
             name: data.name,
             email: data.email,
             password: hashedPassword
@@ -28,7 +28,7 @@ exports.login = async (data) => {
         if (!data.email || !data.password) {
             throw new AppError('Please provide all required fields', 400);
         }
-        const user = await knex('user').select('*').where('email', data.email);
+        const user = await db('user').select('*').where('email', data.email);
         // check if the user exists
         if (!user.length) {
             throw new AppError('User not found', 404);
