@@ -1,3 +1,10 @@
+/**
+ * 
+    * @param {Object} res
+    * @param {Number} statusCode
+    * @param {Object} data
+ */
+
 const successResMsg = (res, statusCode, data) => {
     const {message, ...responseData} = data;
     res.status(statusCode).json({
@@ -6,6 +13,13 @@ const successResMsg = (res, statusCode, data) => {
         ...responseData
     });
 }
+
+/**
+ * 
+ * @param {*} res 
+ * @param {*} statusCode 
+ * @param {*} message 
+ */
 
 const errorResMsg = (res, statusCode, message) => {
     res.status(statusCode).json({
