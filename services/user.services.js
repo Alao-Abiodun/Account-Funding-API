@@ -77,3 +77,20 @@ exports.transferFundsToUserAccount = async (paramsData, bodyData, sender) => {
         console.log(error.message);
     }
 }
+
+
+exports.withdrawFunds = async (data, withdrawal) => {
+    const withdrawalId = withdrawal.id;
+    try {
+        const { amountToWithdraw } = data;
+        console.log('amountToWithdraw:',amountToWithdraw);
+        const findUserBalance = await await db.select('balance').from('user').leftJoin('account', 'user.id', 'account.user_id').where('user.id', withdrawalId);
+        const newBalance = findUserBalance[0].balance - amountToWithdraw;
+        await db('account').where('id', withdrawalId).update({
+            balance: newBalance
+        });
+        return parseInt(amountToWithdraw);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
