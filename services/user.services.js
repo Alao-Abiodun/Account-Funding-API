@@ -53,3 +53,27 @@ exports.fundUserAccount = async (paramsData, bodyData) => {
         console.log(error.message);
     }
 }
+
+exports.transferFundsToUserAccount = async (paramsData, bodyData, sender) => {
+    let senderId = sender.id;
+    try {
+        const { id } = paramsData;
+        const { amountToTransfer } = bodyData;
+        const reciever = await db.select('balance').from('user').leftJoin('account', 'user.id', 'account.user_id').where('user.id', id);
+        console.log('services test:',reciever);
+        reciever[0].balance += parseInt(amountToTransfer);
+        await db('account').where('id', id).update({
+            balance: reciever[0].balance
+        });
+        // remove the amount send the from the other user account
+        const sender = await db.select('balance').from('user').leftJoin('account', 'user.id', 'account.user_id').where('user.id', senderId);
+        console.log("sender:",senderId)
+        sender[0].balance -= parseInt(amountToTransfer);
+        await db('account').where('id', senderId).update({
+            balance: sender[0].balance
+        });
+        return reciever; 
+    } catch (error) {
+        console.log(error.message);
+    }
+}
