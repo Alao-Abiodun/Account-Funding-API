@@ -70,7 +70,9 @@ app.use("/api/v1/users", userRouter);
 
 // Unhandled Routes
 app.all("*", (req, res) => {
-  res.status(404).json({ message: `Can't find resource ${req.originalUrl} on this server` });
+  res
+    .status(404)
+    .json({ message: `Can't find resource ${req.originalUrl} on this server` });
 });
 
 // Global Error Handler
