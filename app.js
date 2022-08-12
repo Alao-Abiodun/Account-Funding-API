@@ -8,14 +8,14 @@ const dotenv = require("dotenv");
 const mongoSanitize = require("express-mongo-sanitize");
 // const key = require("./utils/libs/gen-key");
 
-// const globalErrorHandler = require("./controllers/errorController");
+const globalErrorHandler = require("./controllers/error.controller");
 
 dotenv.config();
 
 // if (process.env.NODE_ENV === "production") {
 //   // Temporarily disable this random secret for signing token
-//   // process.env.PAYERCOINS_ACCESS_TOKEN_SECRET = key(64);
-//   process.env.PAYERCOINS_COOKIE_SECRET = key(64);
+//   // process.env.LENDSQR_ACCESS_TOKEN_SECRET = key(64);
+//   process.env.LENDSQR_COOKIE_SECRET = key(64);
 // }
 
 const app = express();
@@ -74,6 +74,6 @@ app.all("*", (req, res) => {
 });
 
 // Global Error Handler
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 module.exports = app;
