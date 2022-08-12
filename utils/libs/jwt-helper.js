@@ -16,8 +16,6 @@ module.exports = {
     return token;
   },
   verifyAccessToken: (token) => {
-    console.log(token, 'TOKEN')
-    console.log('PAYLOAD SECRET => ', secret)
     const payload = JWT.verify(token, secret);
     console.log(payload);
     return payload;

@@ -54,3 +54,17 @@ exports.fundUserAccount = async (req, res) => {
         console.log(error.message);
     }
 }
+
+exports.transferFundsToUserAccount = async (req, res) => {
+    try {
+        const result = await userServices.transferFundsToUserAccount(req.params, req.body, req.user);
+        console.log("controller test",result);
+        const dataInfo = {
+            message: 'User bank account transferred successfully',
+            result
+        }
+        return successResMsg(res, 200, dataInfo);
+    } catch (error) {
+        console.log(error.message);
+    }
+}

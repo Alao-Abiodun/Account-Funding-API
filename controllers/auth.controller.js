@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
     let result;
     try {
         result = await authServices.login(req.body);
-        createSendToken(result, 200, res);
+        createSendToken(result[0], 200, res);
     } catch (error) {
         console.log(error.message);
     }
