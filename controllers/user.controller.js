@@ -68,3 +68,17 @@ exports.transferFundsToUserAccount = async (req, res) => {
         console.log(error.message);
     }
 }
+
+exports.withdrawFunds = async (req, res) => {
+    try {
+        const result = await userServices.withdrawFunds(req.body, req.user);
+        // message for withdraw success
+        const dataInfo = {
+            message: 'User bank account withdrawn funds successfully',
+            result
+        }
+        return successResMsg(res, 200, dataInfo);
+    } catch (error) {
+        console.log(error.message);
+    }
+}

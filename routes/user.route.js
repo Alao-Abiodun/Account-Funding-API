@@ -15,5 +15,7 @@ router.post('/account/:id', userController.fundUserAccount);
 
 router.post('/account/:id/transfer', isAuthenticated, userController.transferFundsToUserAccount);
 
+router.put('/account/withdraw', isAuthenticated, userController.withdrawFunds);
+
 module.exports.userRouter = router;
 
