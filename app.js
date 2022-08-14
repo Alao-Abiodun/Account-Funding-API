@@ -53,12 +53,12 @@ const { userRouter } = require("./routes/user.route");
 
 //default Route
 app.get("/", (req, res) => {
-  res.json({ message: `Welcome to Account-Funding API v1` });
+  res.json({ message: `Welcome to Lendsqr Account-Funding API v1` });
 });
 
 // Home Route
 app.get("/api/v1/home", (req, res) => {
-  res.json({ message: `Welcome to Account-Funding API v1` });
+  res.json({ message: `Welcome to Lendsqr Account-Funding API v1` });
 });
 
 //   Routes Middleware
