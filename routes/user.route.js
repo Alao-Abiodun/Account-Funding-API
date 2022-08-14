@@ -20,7 +20,7 @@ router.post(
 );
 
 router.post(
-  "/account/:id/transfer",
+  "/:sender_id/account/:reciever_id/transfer",
   isAuthenticated,
   userController.transferFundsToUserAccount
 );

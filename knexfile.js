@@ -27,8 +27,8 @@ module.exports = {
       host: process.env.dbHost,
       user: process.env.dbUser,
       password: process.env.dbPass,
-      database: process.env.dbName || "account_funding_db",
-      port: process.env.dbPort || 3306,
+      database: process.env.dbName,
+      port: process.env.dbPort,
     },
   },
   testing: {

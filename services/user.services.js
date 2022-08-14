@@ -70,31 +70,33 @@ exports.fundUserAccount = async (paramsData, bodyData, authData) => {
   }
 };
 
-exports.transferFundsToUserAccount = async (paramsData, bodyData, sender) => {
-  let senderId = sender.id;
+exports.transferFundsToUserAccount = async (paramsData, bodyData) => {
   try {
-    const { id } = paramsData;
+    const { sender_id, reciever_id } = paramsData;
     const { amountToTransfer } = bodyData;
     // get the sender details
-    const sender = await db
+    const sender = await await db
       .select("balance")
-      .from("user")
-      .leftJoin("account", "user.id", "account.user_id")
-      .where("user.id", senderId);
+      .from("account")
+      .where("id", sender_id);
     console.log("sender:", sender);
     // check if the amountToTransfer is greater than the sender balance
     if (amountToTransfer > sender[0].balance) {
       throw new AppError("Insufficient funds", 400);
     }
-    // find user account by the account id
-    const reciever = await db.select("balance").from("account").where("id", id);
+    // find receiver account by the account id
+    const reciever = await db
+      .select("balance")
+      .from("account")
+      .where("id", reciever_id);
+    console.log(reciever);
     reciever[0].balance += parseInt(amountToTransfer);
-    await db("account").where("id", id).update({
+    await db("account").where("id", reciever_id).update({
       balance: reciever[0].balance,
     });
     // remove the amount send the from the other user account
     sender[0].balance -= parseInt(amountToTransfer);
-    await db("account").where("id", id).update({
+    await db("account").where("id", sender_id).update({
       balance: sender[0].balance,
     });
     return reciever;

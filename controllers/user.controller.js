@@ -67,8 +67,7 @@ exports.transferFundsToUserAccount = async (req, res, next) => {
   try {
     const result = await userServices.transferFundsToUserAccount(
       req.params,
-      req.body,
-      req.user
+      req.body
     );
     console.log("controller test", result);
     const dataInfo = {
