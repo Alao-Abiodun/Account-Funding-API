@@ -20,11 +20,15 @@ router.post(
 );
 
 router.post(
-  "/account/:id/transfer",
+  "/:sender_id/account/:reciever_id/transfer",
   isAuthenticated,
   userController.transferFundsToUserAccount
 );
 
-router.put("/account/withdraw", isAuthenticated, userController.withdrawFunds);
+router.put(
+  "/account/:id/withdraw",
+  isAuthenticated,
+  userController.withdrawFunds
+);
 
 module.exports.userRouter = router;
