@@ -75,11 +75,10 @@ exports.transferFundsToUserAccount = async (paramsData, bodyData) => {
     const { sender_id, reciever_id } = paramsData;
     const { amountToTransfer } = bodyData;
     // get the sender details
-    const sender = await await db
+    const sender = await db
       .select("balance")
       .from("account")
       .where("id", sender_id);
-    console.log("sender:", sender);
     // check if the amountToTransfer is greater than the sender balance
     if (amountToTransfer > sender[0].balance) {
       throw new AppError("Insufficient funds", 400);
@@ -89,7 +88,6 @@ exports.transferFundsToUserAccount = async (paramsData, bodyData) => {
       .select("balance")
       .from("account")
       .where("id", reciever_id);
-    console.log(reciever);
     reciever[0].balance += parseInt(amountToTransfer);
     await db("account").where("id", reciever_id).update({
       balance: reciever[0].balance,
@@ -105,18 +103,20 @@ exports.transferFundsToUserAccount = async (paramsData, bodyData) => {
   }
 };
 
-exports.withdrawFunds = async (data, withdrawal) => {
-  const withdrawalId = withdrawal.id;
+exports.withdrawFunds = async (bodyData, paramsData) => {
   try {
-    const { amountToWithdraw } = data;
+    const { amountToWithdraw } = bodyData;
+    const { id } = paramsData;
     console.log("amountToWithdraw:", amountToWithdraw);
-    const findUserBalance = await await db
+    const findUserBalance = await db
       .select("balance")
-      .from("user")
-      .leftJoin("account", "user.id", "account.user_id")
-      .where("user.id", withdrawalId);
+      .from("account")
+      .where("id", id);
+    if (amountToWithdraw > findUserBalance[0].balance) {
+      throw new AppError("Insufficient funds", 400);
+    }
     const newBalance = findUserBalance[0].balance - amountToWithdraw;
-    await db("account").where("id", withdrawalId).update({
+    await db("account").where("id", id).update({
       balance: newBalance,
     });
     return parseInt(amountToWithdraw);
