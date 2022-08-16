@@ -1,13 +1,15 @@
 FROM node:14
 
-EXPOSE 8080
+WORKDIR /app
 
-WORKDIR /src/app
+COPY package.json ./
 
-RUN npm install i npm@latest -g
-
-COPY package*.json ./
+RUN yarn install
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+ENV PORT 8880
+
+EXPOSE $PORT
+
+CMD ["yarn", "run", "dev"]
