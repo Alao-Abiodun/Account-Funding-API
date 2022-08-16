@@ -4,6 +4,25 @@
 
 This API is a simple Fintech Project that allows user to register or login to the system and then fund their account, and then withdraw funds from the account and transfer funds to other accounts.
 
+### How to build an image
+
+```bash
+  docker build -t `your-image-name` .
+```
+
+### How to run Docker container
+
+```bash
+docker run --env-file ./.env -p `port-to-run-on-your-local-system`:`port-running-on-your-express-app `-d --name `your-container-name` `your-image-name`
+```
+
+### How to run locally
+
+```bash
+yarn install
+yarn run start
+```
+
 ### User Authentication API Reference
 
 #### register
