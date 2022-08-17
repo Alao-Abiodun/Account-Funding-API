@@ -1,8 +1,6 @@
 require("dotenv").config();
 const knex = require("./database/db");
 
-// const chalk = require('chalk')
-
 // UNCAUGHT EXCEPTIONS
 // Application needs to be crashed then a tool will be needed to restart the APP
 process.on("uncaughtException", (err) => {
@@ -19,11 +17,9 @@ knex
   .raw("select 1+1 as result")
   .then(() => {
     console.log("Knex connection successfully established");
-    // console.log(chalk.green('Knex connection successful'));
   })
   .catch((err) => {
     console.log("Knex connection failed");
-    // console.log(chalk.red('Knex connection failed'));
     console.log(err);
   });
 

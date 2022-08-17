@@ -4,6 +4,17 @@
 
 This API is a simple Fintech Project that allows user to register or login to the system and then fund their account, and then withdraw funds from the account and transfer funds to other accounts.
 
+[Postman-Documentation](https://documenter.getpostman.com/view/7308264/VUjSGPn6)
+
+### Technology Used
+
+- [Node.js](https://nodejs.org/) - Server Side
+- [Express.js](https://expressjs.com/) for routing
+- [MySQL](https://www.mysql.com/) for database
+- [Knex.js](https://knexjs.org/) (ORM)
+- [Heroku](https://www.heroku.com/) for deployment and hosting
+- [Scalegrid](https://scalegrid.io/) to manage the deployment of the database on cloud premises
+
 ### How to build an image
 
 ```bash
